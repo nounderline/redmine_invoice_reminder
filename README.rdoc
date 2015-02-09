@@ -1,0 +1,10 @@
+= Redmine Invoice Reminder
+
+Automatically send e-mail about overdue invoices to your contacts for each project with customizable options.
+
+== Configuration
+In order to send e-mail reminders, after plugin installation, *daily* +cron+ must be configured:
+
+  * 4 * * * cd $REDMINE_PATH && bundle exec rake redmine_invoice_reminder:send_reminders RAILS_ENV=production &> /tmp/redmine_invoice_reminder
+
+This will send reminders every day at 4:00. 

@@ -1,0 +1,14 @@
+en:
+  label_invoice_reminder_email_subject: Email subject
+  label_invoice_reminder_email_body: Email body
+  label_invoice_reminder_email_pdf_attachment: Attach invoice PDF
+  label_invoice_reminder_email_recipients: Email recipients
+  label_invoice_reminder_email_to_contact: Send to Contact
+  label_invoice_reminder_email_to_pm: Send to Project Manager
+  default_invoice_reminder_email_subject: Past due invoice reminder
+  default_invoice_reminder_email_body: |
+    Greetings,
+
+    This is friendly reminder to let you know that invoice %{invoice.number} is past due. If you have already sent the payment, please disregard this message. If not, we would appreciate you prompt attention to this matter.
+  
+    Thank you.
