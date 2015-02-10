@@ -17,7 +17,7 @@
     ]
   }
 -%>
-<%= @settings['invoice_reminder_email_recipients'] %>
+
 <style>
 #settings input[type="text"], #settings textarea {
   width: 70%;
@@ -34,6 +34,10 @@
   <em class="info mail-macros"><%= l(:text_email_macros, :macro => macro_list.map{ |m| link_to m, "#", :class => "mail-macro" }.join(', ')).html_safe %></em>
 </p>
 <p>
+  <label><%= l(:label_invoice_reminder_email_from) %></label>
+  <%= text_field_tag 'settings[invoice_reminder_email_from]', @settings[:invoice_reminder_email_from] %>
+</p>
+<p>
   <label><%= l(:label_invoice_reminder_email_pdf_attachment) %></label>
   <%= check_box_tag 'settings[invoice_reminder_email_pdf_attachment]', 1, @settings[:invoice_reminder_email_pdf_attachment].to_i > 0 %>
 </p>
@@ -41,6 +45,7 @@
   <label><%= l(:label_invoice_reminder_email_recipients) %></label>
   <%= select_tag 'settings[invoice_reminder_email_recipients]', options_for_select(recipients_options, @settings[:invoice_reminder_email_recipients]), multiple: true, size: 12 %>
 </p>
+
 
 <script>
   $.fn.insertAtCaret = function(myValue) {

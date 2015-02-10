@@ -1,6 +1,7 @@
 en:
   label_invoice_reminder_email_subject: Email subject
   label_invoice_reminder_email_body: Email body
+  label_invoice_reminder_email_from: Email from
   label_invoice_reminder_email_pdf_attachment: Attach invoice PDF
   label_invoice_reminder_email_recipients: Email recipients
   label_invoice_reminder_email_to_contact: Send to Contact
