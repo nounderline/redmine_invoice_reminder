@@ -2,7 +2,7 @@ Redmine::Plugin.register :redmine_invoice_reminder do
   name 'Redmine Invoice Reminder plugin'
   author 'Ralph Gutkowski'
   description 'Remind contacts about overdue invoice'
-  version '0.0.2'
+  version '0.1.0'
   url 'http://rgtos.com'
   author_url 'http://rgtos.com'
 
