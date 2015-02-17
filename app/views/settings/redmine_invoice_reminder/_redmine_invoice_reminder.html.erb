@@ -1,5 +1,5 @@
 <%-
-  macro_list = ['%{invoice.number}', '%{invoice.issue_date}', '%{invoice.due_date}', '%{invoice.total}']
+  macro_list = %w(%{invoice.number} %{invoice.url} %{invoice.issue_date} %{invoice.due_date} %{invoice.total} %{project.name})
   recipients_options = []
 
   recipients_options << [l(:field_invoice_contact), '_contact']
@@ -70,8 +70,27 @@
     });
   };
 
-  $(".mail-macros a.mail-macro").bind("click", function() {
-    $('#settings_invoice_reminder_email_body').insertAtCaret($(this).html());
-    return false;
+  $(function() {
+    var $lastInput = null,
+        $subjectInput = $('#settings_invoice_reminder_email_subject')[0],
+        $bodyInput = $('#settings_invoice_reminder_email_body')[0];
+
+    $('input, textarea').on('focus', function() {
+      $lastInput = this;
+    });
+
+
+    $('.mail-macros a.mail-macro').bind('click', function() {
+      var $target = null;
+      if ($lastInput == $subjectInput || $lastInput == $bodyInput) {
+        $target = $lastInput;
+      } else {
+        $target = $bodyInput;
+      }
+
+      $($target).insertAtCaret($(this).html());
+      
+      return false;
+    });
   });
 </script>
