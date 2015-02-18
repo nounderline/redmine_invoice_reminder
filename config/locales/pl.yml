@@ -1,0 +1,7 @@
+pl:
+  label_invoice_reminder_email_subject: Tytuł emaila
+  label_invoice_reminder_email_body: Zawartość emaila
+  label_invoice_reminder_email_from: Nadawca emaila
+  label_invoice_reminder_email_pdf_attachment: Załącz PDF faktury
+  label_invoice_reminder_email_recipients: Odbiorcy
+  label_invoice_reminder_email_client_cf: CF dla emaila klienta

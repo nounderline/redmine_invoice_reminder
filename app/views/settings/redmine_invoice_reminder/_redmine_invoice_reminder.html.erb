@@ -1,6 +1,10 @@
 <%-
   macro_list = %w(%{invoice.number} %{invoice.url} %{invoice.issue_date} %{invoice.due_date} %{invoice.total} %{project.name})
+  custom_contact_email_options = InvoiceCustomField.select([:id, :name]).map { |f| [ f[:name], ("_%d" % f[:id]) ] }
   recipients_options = []
+
+  
+  custom_contact_email_options.unshift ['', '']
 
   recipients_options << [l(:field_invoice_contact), '_contact']
 
@@ -42,10 +46,13 @@
   <%= check_box_tag 'settings[invoice_reminder_email_pdf_attachment]', 1, @settings[:invoice_reminder_email_pdf_attachment].to_i > 0 %>
 </p>
 <p>
+  <label><%= l(:label_invoice_reminder_email_client_cf) %></label>
+  <%= select_tag 'settings[invoice_reminder_email_client_cf]', options_for_select(custom_contact_email_options, @settings[:invoice_reminder_email_client_cf]) %>
+</p>
+<p>
   <label><%= l(:label_invoice_reminder_email_recipients) %></label>
   <%= select_tag 'settings[invoice_reminder_email_recipients]', options_for_select(recipients_options, @settings[:invoice_reminder_email_recipients]), multiple: true, size: 12 %>
 </p>
-
 
 <script>
   $.fn.insertAtCaret = function(myValue) {

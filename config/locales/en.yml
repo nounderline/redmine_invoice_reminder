@@ -5,7 +5,7 @@ en:
   label_invoice_reminder_email_pdf_attachment: Attach invoice PDF
   label_invoice_reminder_email_recipients: Email recipients
   label_invoice_reminder_email_to_contact: Send to Contact
-  label_invoice_reminder_email_to_pm: Send to Project Manager
+  label_invoice_reminder_email_client_cf: Client Email CF
   default_invoice_reminder_email_subject: "[%{project.name}] Past due invoice reminder"
   default_invoice_reminder_email_body: |
     Greetings,

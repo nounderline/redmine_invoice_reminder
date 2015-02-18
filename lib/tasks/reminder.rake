@@ -7,7 +7,7 @@ namespace :redmine_invoice_reminder do
   #       for multiple SQL dialects (sqlite, mysql, postgresql)
   task :send_reminders => :environment do
     now = Date.today
-    invoices = Invoice.includes(:contact, :project)
+    invoices = Invoice.includes(:contact, :project, :custom_values)
                       .where(:status_id => Invoice::SENT_INVOICE)
 
     Rails.logger = Logger.new(STDOUT)

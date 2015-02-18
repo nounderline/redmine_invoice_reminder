@@ -40,7 +40,12 @@ module InvoiceReminderHelper
         when 'r'
           role_ids << value.to_i
         when ''
-          recipients << @invoice.contact if @invoice.contact and value == 'contact' 
+          email_cf = settings[:invoice_reminder_email_client_cf]
+          if value == 'contact' and @invoice.contact and email_cf.present?
+            cf_id = email_cf[1..-1].to_i
+            cv_email = @invoice.custom_values.find { |cv| cv.custom_field_id == cf_id }
+            recipients << cv_email.value if cv_email and cv_email.value.present?
+          end
       end
     end
 
@@ -81,6 +86,8 @@ module InvoiceReminderHelper
         when Contact
           contact = recipient
           tos << "#{contact.name} <#{contact.email}>" if not contact.email.empty?
+        when String
+          tos << recipient
       end
     end
 
