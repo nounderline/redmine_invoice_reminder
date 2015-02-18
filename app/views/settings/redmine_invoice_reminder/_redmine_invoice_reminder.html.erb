@@ -1,6 +1,6 @@
 <%-
   macro_list = %w(%{invoice.number} %{invoice.url} %{invoice.issue_date} %{invoice.due_date} %{invoice.total} %{project.name})
-  custom_contact_email_options = InvoiceCustomField.select([:id, :name]).map { |f| [ f[:name], ("_%d" % f[:id]) ] }
+  custom_contact_email_options = ContactCustomField.select([:id, :name]).map { |f| [ f[:name], ("_%d" % f[:id]) ] }
   recipients_options = []
 
   

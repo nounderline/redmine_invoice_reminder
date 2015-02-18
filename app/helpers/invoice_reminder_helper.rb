@@ -21,6 +21,13 @@ module InvoiceReminderHelper
       :body => (settings[:invoice_reminder_email_body] % args)
     }
   end
+
+  def tos_by_invoice(invoice)
+    @invoice = invoice
+    @project = invoice.project
+
+    invoice_email_tos
+  end
  
   # Get all object from database defined in plugin settings
   def recipient_objects
@@ -41,9 +48,10 @@ module InvoiceReminderHelper
           role_ids << value.to_i
         when ''
           email_cf = settings[:invoice_reminder_email_client_cf]
-          if value == 'contact' and @invoice.contact and email_cf.present?
+          if value == 'contact' and @invoice.contact and email_cf.present? \
+            and @invoice.due_date.to_date <= Date.today # send only after-due to client
             cf_id = email_cf[1..-1].to_i
-            cv_email = @invoice.custom_values.find { |cv| cv.custom_field_id == cf_id }
+            cv_email = @invoice.contact.custom_values.find { |cv| cv[:custom_field_id] === cf_id }
             recipients << cv_email.value if cv_email and cv_email.value.present?
           end
       end

@@ -7,14 +7,14 @@ class InvoiceReminderMailer < ActionMailer::Base
     { :host => Setting.host_name, :protocol => Setting.protocol }
   end
 
-  def invoice_reminders(invoice)
+  def invoice_reminders(invoice, to)
     settings = Setting.plugin_redmine_invoice_reminder
     @invoice = invoice
     @project = @invoice.project
     formatted = format_invoice_reminder
     @from = settings[:invoice_reminder_email_from]
     @subject = formatted[:subject]
-    @body = formatted[:body]
+    @mail_body = formatted[:body]
     
     headers['X-Invoice-Id'] = @invoice.number
 
@@ -22,17 +22,11 @@ class InvoiceReminderMailer < ActionMailer::Base
       attachments[@invoice.filename] = invoice_to_pdf(@invoice)
     end
 
-    Mailer.with_synched_deliveries do
-      tos = invoice_email_tos
-      tos.each { |to| compose(to).deliver }
-      Rails.logger.info "Invoice##{invoice.id} reminder sent to [#{tos.join(', ')}]"
+    message = mail(:to => to, :from => @from, :subject => @subject) do |format|
+      format.text { render :text => 'yo' }
     end
  end
-
-  def compose(to)
-    mail(:to => to, :from => @from, :subject => @subject)
-  end
-
+ 
   # Warning: code below is too bad to look at.
   # If you are strong, improve it!
   def invoice_to_pdf_wicked_pdf(invoice)
